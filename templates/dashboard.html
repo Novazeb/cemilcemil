@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold text-cyan-400">Admin Dashboard</h1>
+        <p>Login sebagai: <span class="text-yellow-400">{{ current_user.username }}</span></p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="bg-slate-800 p-6 rounded-xl shadow-lg h-fit">
+            <h2 class="text-xl font-semibold mb-4 border-b border-slate-700 pb-2">Tambah Project Baru</h2>
+            <form method="POST">
+                <div class="mb-4">
+                    <label class="block text-gray-400 text-sm mb-1">Judul Project</label>
+                    <input type="text" name="title" class="w-full p-2 rounded bg-slate-700 border border-slate-600 focus:outline-none focus:border-cyan-500" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-400 text-sm mb-1">Link Gambar (URL)</label>
+                    <input type="text" name="image_link" placeholder="https://..." class="w-full p-2 rounded bg-slate-700 border border-slate-600 focus:outline-none focus:border-cyan-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-400 text-sm mb-1">Deskripsi</label>
+                    <textarea name="description" rows="4" class="w-full p-2 rounded bg-slate-700 border border-slate-600 focus:outline-none focus:border-cyan-500" required></textarea>
+                </div>
+                <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-bold py-2 rounded transition">
+                    Simpan Project
+                </button>
+            </form>
+        </div>
+
+        <div class="lg:col-cols-2 bg-slate-800 p-6 rounded-xl shadow-lg">
+            <h2 class="text-xl font-semibold mb-4 border-b border-slate-700 pb-2">Daftar Project</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-gray-400 border-b border-slate-700">
+                            <th class="py-2">Judul</th>
+                            <th class="py-2">Deskripsi</th>
+                            <th class="py-2">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in projects %}
+                        <tr class="border-b border-slate-700/50 hover:bg-slate-700/30">
+                            <td class="py-3 font-medium text-cyan-200">{{ p.title }}</td>
+                            <td class="py-3 text-sm text-gray-400">{{ p.description[:50] }}...</td>
+                            <td class="py-3">
+                                <a href="{{ url_for('delete_project', id=p.id) }}" 
+                                   onclick="return confirm('Hapus project ini?')"
+                                   class="text-red-400 hover:text-red-600 text-sm font-bold">Hapus</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

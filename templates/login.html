@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex justify-center items-center h-[80vh]">
+    <div class="bg-slate-800 p-8 rounded-lg shadow-lg w-full max-w-md" data-aos="zoom-in">
+        <h2 class="text-3xl font-bold text-center mb-6 text-cyan-400">Login Admin</h2>
+        
+        <form method="POST">
+            <div class="mb-4">
+                <label class="block text-gray-400 mb-2">Username</label>
+                <input type="text" name="username" class="w-full p-3 rounded bg-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500" required>
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-gray-400 mb-2">Password</label>
+                <input type="password" name="password" class="w-full p-3 rounded bg-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500" required>
+            </div>
+
+            <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold py-3 rounded transition">
+                Masuk
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
